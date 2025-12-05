@@ -1,0 +1,3 @@
+sudo python make_too.py -ra 'PH_RIGHT_ASC' -dec 'PH_DECLINATION' -ra_rate 'PH_RATE_RA' -dec_rate 'PH_RATE_DEC' -obs_time_utc 'PH_OBS_TIME_UTC' -filt 'PH_FILT' -exp 'PH_EXPOSURE' -noexp 'PH_NO_EXP' -name 'PH_NAME' -p 'PH_PRIORITY' -obs_type 'PH_OBS_TYPE' -iit_obs 'PH_IIT_OBS' -pi 'PH_IIT_OBS' -hanle_obs 'PH_HANLE_OBS' -stack 'N' -propnums 'P07'
+
+
