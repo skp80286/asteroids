@@ -29,6 +29,7 @@ def load_template(path):
 def parse_line(line):
     # Example line format:
     # 2025 10 28 1100  21.1635    +14.549    107.3  19.9    0.30   0.070 290  +52   +10    0.38  047  +30   Map/Offsets
+    #print(f"Parsing line: {line}")
     cols = line.strip().split()
     if len(cols) < 12:
         return None
@@ -215,6 +216,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Generate ToO commands for asteroid observations, based on the ephemris data')
     parser.add_argument('-o', '--iitobs', type=str, required=True, help='Name of the IIT observer')
     parser.add_argument('-t', '--timing', type=str, required=True, help='immedidate - observe immediately, preferred - wait for preferred altitude of 40 degrees')
+    parser.add_argument('-l', '--max_streak_length', type=int, default=75, help='maximum streak length')
     args = parser.parse_args()
     if args.timing != "immediate" and args.timing != "preferred":
         raise ValueError(f"--timing should be either immediate or preferred. Invalid value {args.timing}!d")
@@ -286,7 +288,7 @@ if __name__ == "__main__":
                             """
                         # Calculate exposure time (use magnitude if available, otherwise default to 20)
                         mag = rec.get('mag', 20)
-                        exp_time = get_exp(dec=rec['dec_deg'], ra_rate=rec['ra_rate'], dec_rate=rec['dec_rate'], mag=mag)
+                        exp_time = get_exp(dec=rec['dec_deg'], ra_rate=rec['ra_rate'], dec_rate=rec['dec_rate'], mag=mag, max_streak_length=args.max_streak_length)
                         
                         if exp_time > 0:
                             # Update static_params with calculated exposure time
